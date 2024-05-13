@@ -1,42 +1,37 @@
-# README
-
-##writed by oku
-
 # テーブル設計
 
 ## users テーブル
 | Column              | Type   | Options       |
 |---------------------|--------|---------------|
+| email               | string | null: false , unique: true  |
+| encrypted_password            | string | null: false   |
 | nickname            | string | null: false   |
-| email               | string | null: false   |
-| password            | string | null: false   |
+| date_birth          | string | null: false   |
 | last_name           | string | null: false   |
 | first_name          | string | null: false   |
-| last_name_furigana  | string | null: false   |
-| first_name_furigana | string | null: false   |
-| date_birth          | string | null: false   |
-- has_many :items
-- belongs_to :user_login
+| last_name_kana  | string | null: false   |
+| first_name_kana | string | null: false   |
 
-## user_login テーブル
-| Column        | Type    | Options     |
-|---------------|---------|-------------|
-| メールアドレス | string  | null: false |
-| パスワード     | string  | null: false |
+### Association
+
+- has_many :items
 
 
 ## items テーブル
 | Column           | Type   | Options     |
 |------------------|--------|-------------|
-| 商品画像          | image  | null: false |
-| 商品名            | string | null: false |
-| 商品の説明        | text   | null: false |
-| カテゴリー        | string | null: false |
-| 商品の状態        | string | null: false |
-| 配送料の負担      | string | null: false |
-| 発送元の地域      | string | null: false |
-| 発送までの日数    | string | null: false |
-| 販売価格          | int    | null: false |
+| email               | string | null: false , unique: true  |
+| item_name            | string | null: false |
+| price          | int    | null: false |
+| image          | image  | null: false |
+| description        | text   | null: false |
+| category        | string | null: false |
+| condition        | string | null: false |
+| cost_delivery      | string | null: false |
+| region_delivery      | string | null: false |
+| date_delivery    | string | null: false |
+
+### Association
 - belongs_to :users
 
 
