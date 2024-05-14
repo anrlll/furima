@@ -34,5 +34,3 @@
 ### Association
 - belongs_to :users
 
-
-
