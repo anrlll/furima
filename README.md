@@ -54,8 +54,8 @@ belongs_to: item
 | prefecture          | integer    | null: false |
 | municipalities        | string   | null: false |
 | block_number        | string | null: false |
-| building        | string |  |
-| tel        | integer | null: false |
+| building_name        | string |  |
+| tel_number        | integer | null: false |
 | user               | references | null: false , foreign_key: true  |
 
 ### Association
