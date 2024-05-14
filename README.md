@@ -32,8 +32,7 @@
 
 ### Association
 belongs_to: user
-belongs_to: purchase
-belongs_to: delivery
+has_oen: purchase
 
 ## purchases テーブル
 | Column           | Type   | Options     |
@@ -44,13 +43,14 @@ belongs_to: delivery
 ### Association
 belongs_to: user
 belongs_to: item
+belongs_to: delivery
 
 
 ## deliveries テーブル
 | Column           | Type   | Options     |
 |------------------|--------|-------------|
 | postcode            | string | null: false |
-| prefecture_id          | integer    | null: false |
+| region_delivery_id          | integer    | null: false |
 | municipalities        | string   | null: false |
 | block_number        | string | null: false |
 | building_name        | string |  |
@@ -58,6 +58,5 @@ belongs_to: item
 | purchase               | references | null: false , foreign_key: true  |
 
 ### Association
-- belongs_to :user
 - belongs_to :purchase
 
