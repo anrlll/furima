@@ -23,27 +23,26 @@
 | name            | string | null: false |
 | price          | integer    | null: false |
 | description        | text   | null: false |
-| category        | integer | null: false |
-| condition        | integer | null: false |
-| cost_delivery      | integer | null: false |
-| region_delivery      | integer | null: false |
-| date_delivery    | integer | null: false |
+| category_id        | integer | null: false |
+| condition_id        | integer | null: false |
+| cost_delivery_id      | integer | null: false |
+| region_delivery_id      | integer | null: false |
+| date_delivery_id    | integer | null: false |
 | user               | references | null: false , foreign_key: true  |
 
 ### Association
 belongs_to: user
+belongs_to: purchase
+belongs_to: delivery
 
 ## purchases テーブル
 | Column           | Type   | Options     |
 |------------------|--------|-------------|
-| created_at               | date |   |
 | user               | references | null: false , foreign_key: true  |
 | item               | references | null: false , foreign_key: true  |
-| delivery               | references | null: false , foreign_key: true  |
 
 ### Association
 belongs_to: user
-belongs_to: delivery
 belongs_to: item
 
 
@@ -51,13 +50,14 @@ belongs_to: item
 | Column           | Type   | Options     |
 |------------------|--------|-------------|
 | postcode            | string | null: false |
-| prefecture          | integer    | null: false |
+| prefecture_id          | integer    | null: false |
 | municipalities        | string   | null: false |
 | block_number        | string | null: false |
 | building_name        | string |  |
-| tel_number        | integer | null: false |
-| user               | references | null: false , foreign_key: true  |
+| tel_number        | string | null: false |
+| purchase               | references | null: false , foreign_key: true  |
 
 ### Association
 - belongs_to :user
+- belongs_to :purchase
 
