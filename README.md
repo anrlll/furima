@@ -43,7 +43,7 @@ has_oen: purchase
 ### Association
 belongs_to: user
 belongs_to: item
-belongs_to: delivery
+has_one: delivery
 
 
 ## deliveries テーブル
