@@ -25,9 +25,9 @@
 | description        | text   | null: false |
 | category        | integer | null: false |
 | condition        | integer | null: false |
-| cost_delivery      | string | null: false |
-| region_delivery      | string | null: false |
-| date_delivery    | string | null: false |
+| cost_delivery      | integer | null: false |
+| region_delivery      | integer | null: false |
+| date_delivery    | integer | null: false |
 | user               | references | null: false , foreign_key: true  |
 
 ### Association
