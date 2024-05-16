@@ -131,7 +131,8 @@
       <% if Item.exists?(1) %> 
         <% @items.each do |item| %>
           <li class='list'>
-            <%= link_to "#" do %>
+            <%# <%= link_to "#" do %> 
+            <%= link_to item_path(item.id) do %>
             <div class='item-img-content'>
                <%# 画像の表示 商品出品機能完了後に実装%>
               <%= image_tag "item-sample.png", class: "item-img" %>
