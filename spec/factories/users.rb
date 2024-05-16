@@ -7,7 +7,7 @@ FactoryBot.define do
     Faker::Config.locale = :ja
     nickname { Faker::Name.name }
     email { Faker::Internet.email }
-    password { Faker::Internet.password(min_length: 6) }
+    password { '1a' + Faker::Internet.password(min_length: 6) }
     password_confirmation { password }
     date_birth { Faker::Date.between(from: '2022-01-01', to: '2022-12-31') }
     last_name { japanese_user.last.kanji }

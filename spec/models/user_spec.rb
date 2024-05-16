@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
-    # @user = User.new(nickname: "testuser", email: "testtest@example.com", password: "test1111", password_confirmation: "test1111", date_birth: "2000/10/11", last_name: "山田", first_name: "太郎", last_name_kana: "ヤマダ", first_name_kana: "タロウ")
   end
 
   describe 'ユーザー新規登録' do
@@ -60,6 +59,12 @@ RSpec.describe User, type: :model do
       it 'passwordが数字のみだと登録できない' do
         @user.password = '111111'
         @user.password_confirmation = '111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it 'passwordが全角文字を含んでいると登録できない' do
+        @user.password = 'テストケース'
+        @user.password_confirmation = 'テストケース'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
