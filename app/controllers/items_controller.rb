@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   # 商品一覧表示
   def index
-    @items = Item.all
+    @items = Item.order("created_at DESC")
   end
 
   # 商品出品
@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image, :name, :price, :description, :category_id, :condition_id, :costdelivery_id, :regiondelivery_id, :datedelivery_id)#.merge(user_id :current_user.id)
+    params.require(:item).permit(:image, :name, :price, :description, :category_id, :condition_id, :costdelivery_id, :regiondelivery_id, :datedelivery_id).merge(user_id :current_user.id)
     # models/item.rb  has_one_attached :image
   end
 end
