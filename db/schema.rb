@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_15_053634) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_16_074556) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_15_053634) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "items", charset: "utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "price", null: false
+    t.text "description", null: false
+    t.integer "category_id", null: false
+    t.integer "condition_id", null: false
+    t.integer "costdelivery_id", null: false
+    t.integer "regiondelivery_id", null: false
+    t.integer "datedelivery_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "email", null: false
     t.string "encrypted_password", null: false
@@ -48,15 +63,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_15_053634) do
     t.string "first_name", null: false
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.datetime "remember_created_at"
+    t.string "reset_password_token"
+    t.datetime "reset_password_setn_at"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "items", "users"
 end
