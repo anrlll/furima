@@ -13,6 +13,12 @@ class Item < ApplicationRecord
   validates :datedelivery_id, numericality: { other_than: 1 } 
 
   has_one_attached :image
+  belongs_to :user 
+  belongs_to :category, :condition
+  belongs_to :costdelivery, :datedelivery
+  belongs_to :regiondelivery
+
+  validates :user, presence: true
 
   validates :image, presence: true
 
@@ -21,7 +27,7 @@ class Item < ApplicationRecord
   validates :description, length: { in: 1..1000 }, presence: true
 
   validates :price, numericality: {
-    only_integer: true, greather_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999
+    only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999
   }
   validates :costdelivery_id, numericality: { other_than: 1 , message: "can't be blank"} 
 

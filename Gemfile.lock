@@ -300,11 +300,11 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
-  devise
   factory_bot_rails
   faker
-  gimei
   image_processing (~> 1.2)
+  devise
+  gimei
   importmap-rails
   jbuilder
   mini_magick
