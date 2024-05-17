@@ -5,8 +5,8 @@ function item(){
     const texid = document.getElementById("add-tax-price");
     const valueid = document.getElementById("profit");
     const cul = tax * 0.1;
-    texid.innerHTML = Math.round(cul);
-    valueid.innerHTML = Math.round(tax - cul);
+    texid.innerHTML = Math.floor(cul);
+    valueid.innerHTML = Math.floor(tax - cul);
   });
 };
 
