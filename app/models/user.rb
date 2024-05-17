@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category, :condition
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :items
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 

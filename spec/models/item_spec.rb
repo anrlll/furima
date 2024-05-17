@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
-    image_path = Rails.root.join('spec', 'fixtures', 'files', 'staff1.jpg') # テスト画像のパスを指定
-    @item.image.attach(io: File.open(image_path), filename: 'staff1.jpg', content_type: 'image/jpeg')
   end
 
   describe "商品出品機能" do
@@ -78,6 +76,16 @@ RSpec.describe Item, type: :model do
         @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+      it "価格に半角数字以外が含まれている場合は出品できない" do
+        @item.price = "12daer4"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it "userが紐づいていなければ出品できない" do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User can't be blank")
       end
     end
   end

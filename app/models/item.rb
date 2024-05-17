@@ -1,6 +1,12 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   has_one_attached :image
+  belongs_to :user 
+  belongs_to :category, :condition
+  belongs_to :costdelivery, :datedelivery
+  belongs_to :regiondelivery
+
+  validates :user, presence: true
 
   validates :image, presence: true
 
