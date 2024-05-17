@@ -1,5 +1,9 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :costdelivery
+
+  validates :costdelivery_id, numericality: { other_than: 1 } 
+
   has_one_attached :image
   belongs_to :user 
   belongs_to :category, :condition
@@ -17,6 +21,7 @@ class Item < ApplicationRecord
   validates :price, numericality: {
     only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999
   }
+  validates :costdelivery_id, numericality: { other_than: 1 , message: "can't be blank"} 
 
-  validates :category_id, :condition_id, :costdelivery_id, :regiondelivery_id, :datedelivery_id, numericality: { other_than: 1, message:"can't be blank" }, presence: true
+  # validates :category_id, :condition_id, :costdelivery_id, :regiondelivery_id, :datedelivery_id, numericality: { other_than: 1, message:"can't be blank" }, presence: true
 end
