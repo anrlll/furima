@@ -1,5 +1,3 @@
-require 'nkf'
-
 FactoryBot.define do
   factory :user do
     japanese_user = Gimei.name
