@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
 
   # 商品個別表示
   def show
+    @item = Item.find(params[:id])
   end
 
   # 商品保存
