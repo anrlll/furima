@@ -1,8 +1,16 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :costdelivery
+  belongs_to :condition
+  belongs_to :category
+  belongs_to :regiondelivery
+  belongs_to :datedelivery
 
   validates :costdelivery_id, numericality: { other_than: 1 } 
+  validates :condition_id, numericality: { other_than: 1 } 
+  validates :category_id, numericality: { other_than: 1 } 
+  validates :regiondelivery_id, numericality: { other_than: 1 } 
+  validates :datedelivery_id, numericality: { other_than: 1 } 
 
   has_one_attached :image
   belongs_to :user 
