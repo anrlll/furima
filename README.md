@@ -46,7 +46,7 @@ belongs_to: item
 has_one: delivery
 
 
-## deliveries テーブル
+## orders テーブル
 | Column           | Type   | Options     |
 |------------------|--------|-------------|
 | postcode            | string | null: false |
