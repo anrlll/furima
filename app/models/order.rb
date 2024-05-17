@@ -1,10 +1,10 @@
 class Order < ApplicationRecord
   validates :postcode, presence: true
   validates :regiondelivery_id, numericality: { other_than: 1 }
-  validates :municipalities., presence :true
-  validates :blocknumber,presence :true
+  validates :municipalities, presence: true
+  validates :blocknumber,presence: true
   validates :buildingname
-  validates :telnumber presence :true
+  validates :telnumber, presence: true
    
 
   belongs_to :regiondelivery
