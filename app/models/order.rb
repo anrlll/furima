@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   validates :municipalities, presence: true
   validates :blocknumber, presence: true
   validates :telnumber, presence: true
-  validates :purchase, presence: true
+  validates :item, presence: true
 
   belongs_to :regiondelivery
   belongs_to :item
