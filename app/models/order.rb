@@ -4,11 +4,11 @@ class Order < ApplicationRecord
   validates :regiondelivery_id, numericality: { other_than: 1 }
   validates :municipalities, presence: true
   validates :blocknumber, presence: true
-  validates :telnumber, presence: true, format: {with: /\A\d{10,11}\z/}
+  validates :telnumber, presence: true, format: {with: /\A\d{10,11}\z/},length: { in: 10..11 }
   validates :item, presence: true
   attr_accessor :token
   validates :token, presence: true
-  
+
   belongs_to :regiondelivery
   belongs_to :item
 end
