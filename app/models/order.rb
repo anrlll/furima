@@ -8,5 +8,5 @@ class Order < ApplicationRecord
   validates :purchase, presence: true
 
   belongs_to :regiondelivery
-  belongs_to :purchase
+  belongs_to :item
 end
