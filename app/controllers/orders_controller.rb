@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_item, only: [:new,:create]
+  before_action :correct_user, only: [:new, :create]
+
   def create
     @item = Item.find(params[:item_id])
     @order = Order.create(order_params)
@@ -45,5 +48,19 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def correct_item
+    @item = Item.find(params[:item_id])
+    if @item.sold == true
+    redirect_to root_path  
+    end
+  end
+
+  def correct_user
+    @item = Item.find(params[:item_id])
+    if @item.user.id == current_user.id
+    redirect_to root_path  
+    end
   end
 end

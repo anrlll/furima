@@ -19,10 +19,6 @@ class ItemsController < ApplicationController
 
   # 商品個別表示
   def show
-    @item = Item.find(params[:id])
-    if @item.user.id= current_user.id
-    return root_path
-    end
   end
 
   # 商品保存
