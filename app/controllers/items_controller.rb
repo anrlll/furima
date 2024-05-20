@@ -10,6 +10,12 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to root_path
+  end
+
   # 商品個別表示
   def show
     @item = Item.find(params[:id])
