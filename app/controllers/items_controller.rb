@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   # 商品一覧表示
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :find_item, only: [:show, :edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :find_item, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
 
 
@@ -14,6 +14,8 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
   end
+
+  
 
   # 商品個別表示
   def show
@@ -39,6 +41,14 @@ class ItemsController < ApplicationController
       redirect_to item_path
     else
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    else
+      render :show, status: :unprocessable_entity
     end
   end
 
