@@ -39,6 +39,7 @@ has_oen: purchase
 |------------------|--------|-------------|
 | user               | references | null: false , foreign_key: true  |
 | item               | references | null: false , foreign_key: true  |
+| order               | references | null: false , foreign_key: true  |
 
 ### Association
 belongs_to: user
@@ -55,7 +56,7 @@ has_one: delivery
 | block_number        | string | null: false |
 | building_name        | string |  |
 | tel_number        | string | null: false |
-| purchase               | references | null: false , foreign_key: true  |
+| item               | references | null: false , foreign_key: true  |
 
 ### Association
 - belongs_to :purchase
