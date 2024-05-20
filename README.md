@@ -25,9 +25,9 @@
 | description        | text   | null: false |
 | category_id        | integer | null: false |
 | condition_id        | integer | null: false |
-| cost_delivery_id      | integer | null: false |
-| region_delivery_id      | integer | null: false |
-| date_delivery_id    | integer | null: false |
+| costdelivery_id      | integer | null: false |
+| regiondelivery_id      | integer | null: false |
+| datedelivery_id    | integer | null: false |
 | user               | references | null: false , foreign_key: true  |
 
 ### Association
@@ -39,14 +39,15 @@ has_oen: purchase
 |------------------|--------|-------------|
 | user               | references | null: false , foreign_key: true  |
 | item               | references | null: false , foreign_key: true  |
+| order               | references | null: false , foreign_key: true  |
 
 ### Association
 belongs_to: user
 belongs_to: item
-has_one: delivery
+has_one: order
 
 
-## deliveries テーブル
+## orders テーブル
 | Column           | Type   | Options     |
 |------------------|--------|-------------|
 | postcode            | string | null: false |
@@ -55,8 +56,8 @@ has_one: delivery
 | block_number        | string | null: false |
 | building_name        | string |  |
 | tel_number        | string | null: false |
-| purchase               | references | null: false , foreign_key: true  |
+| item               | references | null: false , foreign_key: true  |
 
 ### Association
-- belongs_to :purchase
+- belongs_to :item
 
