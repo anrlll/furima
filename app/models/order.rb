@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   validates :item, presence: true
   attr_accessor :token
   validates :token, presence: true
-
+  
   belongs_to :regiondelivery
   belongs_to :item
 end

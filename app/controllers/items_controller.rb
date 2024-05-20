@@ -36,7 +36,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    
+    if @item.sold==true
+      redirect_to root_path
+    end
   end
 
   def update
@@ -57,7 +59,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:image, :name, :price, :description, :category_id, :condition_id, :costdelivery_id, :regiondelivery_id, :datedelivery_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :name, :price, :description, :category_id, :condition_id, :costdelivery_id, :regiondelivery_id, :datedelivery_id).merge(user_id: current_user.id, sold: false)
   end
 
   def find_item

@@ -13,6 +13,11 @@ class OrdersController < ApplicationController
     if @order.valid?
       pay_item
       @order.save
+      # sold prameter更新
+      item=Item.find(params[:item_id])
+      item.sold=true
+      item.save
+
       redirect_to root_path
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]

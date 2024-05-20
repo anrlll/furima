@@ -28,6 +28,7 @@
 | costdelivery_id      | integer | null: false |
 | regiondelivery_id      | integer | null: false |
 | datedelivery_id    | integer | null: false |
+| sold    | boolean | default: false |
 | user               | references | null: false , foreign_key: true  |
 
 ### Association
