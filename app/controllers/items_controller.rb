@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.sold==true
+    if @item.user_id.present?
       redirect_to root_path
     end
   end
@@ -46,6 +46,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    Purchase.desrtroy(item_id: @item.id)
     if @item.destroy
       redirect_to root_path
     else
@@ -55,7 +56,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:image, :name, :price, :description, :category_id, :condition_id, :costdelivery_id, :regiondelivery_id, :datedelivery_id).merge(user_id: current_user.id, sold: false)
+    params.require(:item).permit(:image, :name, :price, :description, :category_id, :condition_id, :costdelivery_id, :regiondelivery_id, :datedelivery_id).merge(user_id: current_user.id)
   end
 
   def find_item

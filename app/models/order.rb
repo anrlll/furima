@@ -5,10 +5,10 @@ class Order < ApplicationRecord
   validates :municipalities, presence: true
   validates :blocknumber, presence: true
   validates :telnumber, presence: true, format: {with: /\A\d{10,11}\z/},length: { in: 10..11 }
-  validates :item, presence: true
+  validates :purchase, presence: true
   attr_accessor :token
   validates :token, presence: true
 
   belongs_to :regiondelivery
-  belongs_to :item
+  belongs_to :purchase
 end

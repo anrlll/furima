@@ -28,19 +28,17 @@
 | costdelivery_id      | integer | null: false |
 | regiondelivery_id      | integer | null: false |
 | datedelivery_id    | integer | null: false |
-| sold    | boolean | default: false |
 | user               | references | null: false , foreign_key: true  |
 
 ### Association
 belongs_to: user
-has_oen: purchase
+has_one: purchase
 
 ## purchases テーブル
 | Column           | Type   | Options     |
 |------------------|--------|-------------|
 | user               | references | null: false , foreign_key: true  |
 | item               | references | null: false , foreign_key: true  |
-| order               | references | null: false , foreign_key: true  |
 
 ### Association
 belongs_to: user
@@ -52,13 +50,13 @@ has_one: order
 | Column           | Type   | Options     |
 |------------------|--------|-------------|
 | postcode            | string | null: false |
-| region_delivery_id          | integer    | null: false |
+| regiondelivery_id          | integer    | null: false |
 | municipalities        | string   | null: false |
-| block_number        | string | null: false |
-| building_name        | string |  |
-| tel_number        | string | null: false |
-| item               | references | null: false , foreign_key: true  |
+| blocknumber        | string | null: false |
+| buildingname        | string |  |
+| telnumber        | string | null: false |
+| purchase               | references | null: false , foreign_key: true  |
 
 ### Association
-- belongs_to :item
+- belongs_to :purchase
 
