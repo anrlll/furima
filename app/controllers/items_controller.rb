@@ -46,7 +46,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    Purchase.desrtroy(item_id: @item.id)
     if @item.destroy
       redirect_to root_path
     else
