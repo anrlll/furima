@@ -2,11 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Userorder, type: :model do
   before do
-    item = FactoryBot.build(:item)
-    purchase = FactoryBot.build(:purchase)
-    order = FactoryBot.build(:order)
-
-    @userorder = FactoryBot.build(:userorder,item_id: item.id,order_id: order.id, purchase_id: purchase.id)
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item, user_id:@user.id)
+    @purchase = FactoryBot.build(:purchase, item_id: @item.id,user_id: @user.id)
+    @order = FactoryBot.build(:order,purchase_id: @purchase.id)
+    # 暗号化されてnilになっている
+    @userorder = FactoryBot.build(:userorder, purchase_id: @order.purchase_id)
+    binding.pry
   end
 
   describe '商品購入' do
