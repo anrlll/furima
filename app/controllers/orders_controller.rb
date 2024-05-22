@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_item, only: [:new,:create]
+  before_action :correct_item, only: [:new, :create]
   before_action :correct_user, only: [:new, :create]
 
   def create
@@ -37,20 +37,20 @@ class OrdersController < ApplicationController
 
   def correct_item
     @item = find_item
-    if @item.purchase == true
-    redirect_to root_path  
+    if @item.purchase
+      redirect_to root_path
     end
   end
 
   def correct_user
-    @item = find_item
-    if @item.user.id == current_user.id
-    redirect_to root_path  
+    if current_user.id == @item.user_id
+      redirect_to root_path
     end
+  end
+
+  def find_item
+    @item = Item.find(params[:item_id])
+    return @item
   end
 end
 
-def find_item
-  @item = Item.find(params[:item_id])
-  return @item
-end
