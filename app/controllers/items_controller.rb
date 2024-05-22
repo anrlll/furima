@@ -32,9 +32,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.user_id.present?
-      redirect_to root_path
-    end
+    
   end
 
   def update
@@ -46,7 +44,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    Purchase.desrtroy(item_id: @item.id)
     if @item.destroy
       redirect_to root_path
     else
