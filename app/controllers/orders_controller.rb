@@ -17,7 +17,6 @@ class OrdersController < ApplicationController
 
   def new
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @item = Item.find(params[:item_id])
     @userorder = Userorder.new
   end
 
@@ -37,16 +36,21 @@ class OrdersController < ApplicationController
   end
 
   def correct_item
-    @item = Item.find(params[:item_id])
-    # if @item.sold == true
-    # redirect_to root_path  
-    # end
+    @item = find_item
+    if @item.purchase == true
+    redirect_to root_path  
+    end
   end
 
   def correct_user
-    @item = Item.find(params[:item_id])
+    @item = find_item
     if @item.user.id == current_user.id
     redirect_to root_path  
     end
   end
+end
+
+def find_item
+  @item = Item.find(params[:item_id])
+  return @item
 end

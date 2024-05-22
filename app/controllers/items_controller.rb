@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.user_id.present?
+    if @item.purchase==true
       redirect_to root_path
     end
   end
