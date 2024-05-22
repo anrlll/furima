@@ -2,12 +2,20 @@ require 'rails_helper'
 
 RSpec.describe Userorder, type: :model do
   before do
-    @userorder = FactoryBot.build(:userorder)
+    item = FactoryBot.build(:item)
+    purchase = FactoryBot.build(:purchase)
+    order = FactoryBot.build(:order)
+
+    @userorder = FactoryBot.build(:userorder,item_id: item.id,order_id: order.id, purchase_id: purchase.id)
   end
 
   describe '商品購入' do
     context '商品購入できる場合 ' do
       it 'すべての要素が条件を満たせば購入できる' do
+        expect(@userorder).to be_valid
+      end
+      it '建物名が空でも購入できる' do
+        @userorder.buildingname = ''
         expect(@userorder).to be_valid
       end
     end
@@ -57,12 +65,22 @@ RSpec.describe Userorder, type: :model do
         @userorder.valid?
         expect(@userorder.errors.full_messages).to include("Telnumber is too short (minimum is 10 characters)")
       end
+      it '電話番号が12桁以上だと購入できない' do
+        @userorder.telnumber = '123456789012345'
+        @userorder.valid?
+        expect(@userorder.errors.full_messages).to include("Telnumber is too long (maximum is 11 characters)")
+      end
       it '電話番号が全角数値を含んでいると登録できない' do
         @userorder.telnumber = '０３11111111'
         @userorder.valid?
         expect(@userorder.errors.full_messages).to include("Telnumber is invalid")
       end
       it 'クレジットカードの情報が誤っている場合は購入できない' do
+        @userorder.token = ''
+        @userorder.valid?
+        expect(@userorder.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'トークンが空の場合は購入できない' do
         @userorder.token = ''
         @userorder.valid?
         expect(@userorder.errors.full_messages).to include("Token can't be blank")
