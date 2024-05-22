@@ -9,6 +9,8 @@ class Userorder < ApplicationRecord
     validates :blocknumber
     validates :telnumber, format: {with: /\A\d{10,11}\z/},length: { in: 10..11 }
     validates :token
+    validates :item_id
+    validates :user_id
   end
 
   validates :regiondelivery_id, numericality: { other_than: 1 }
