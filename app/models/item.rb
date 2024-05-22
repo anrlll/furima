@@ -19,8 +19,6 @@ class Item < ApplicationRecord
   belongs_to :regiondelivery
   has_one :purchase
 
-  validates :sold, inclusion:{in: [true,false]}
-
   validates :user, presence: true
 
   validates :image, presence: true

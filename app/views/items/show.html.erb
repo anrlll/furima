@@ -9,11 +9,11 @@
     <div class="item-img-content">
       <%= image_tag @item.image.variant(resize: '800x500'), class: 'item-imag' if @item.image.attached? %>
 
-      <% if @item.sold==true%>
-      <div class="sold-out">
+      <%# <% if @item.sold==true%> 
+      <%# <div class="sold-out">
         <span>Sold Out!!</span>
-      </div>
-      <% end %>
+      </div> %>
+      <%# <% end %> 
 
     </div>
     <div class="item-price-box">
@@ -32,9 +32,9 @@
         <%= link_to "削除", item_path(@item.id) , data: { turbo_method: :delete }, class:"item-destroy" %>
         <%= link_to "購入画面に進む", root_path ,data: { turbo: false },class:"item-red-btn"%>
       <% else %>
-        <% if @item.sold == false%>
+        <%# <% if @item.sold == false%> 
           <%= link_to "購入画面に進む", new_item_orders_path(@item.id) ,data: { turbo: false },class:"item-red-btn"%>
-        <%end%>
+        <%# <%end%> 
       <% end %>
     <% end %>
 

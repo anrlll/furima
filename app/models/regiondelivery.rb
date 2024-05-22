@@ -51,4 +51,5 @@ class Regiondelivery < ActiveHash::Base
   ]
   include ActiveHash::Associations
   has_many :items
+  has_many :userorders
 end

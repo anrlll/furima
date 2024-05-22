@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_20_201811) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_21_131420) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -51,7 +51,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_20_201811) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.boolean "sold"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -62,21 +61,41 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_20_201811) do
     t.string "blocknumber", null: false
     t.string "buildingname"
     t.string "telnumber", null: false
+    t.bigint "purchase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["purchase_id"], name: "index_orders_on_purchase_id"
+  end
+
+  create_table "purchase_orders", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_orders_on_item_id"
+    t.index ["item_id"], name: "index_purchase_orders_on_item_id"
+    t.index ["user_id"], name: "index_purchase_orders_on_user_id"
   end
 
   create_table "purchases", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "item_id"
-    t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_purchases_on_item_id"
-    t.index ["order_id"], name: "index_purchases_on_order_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "userorders", charset: "utf8", force: :cascade do |t|
+    t.string "postcode", null: false
+    t.integer "regiondelivery_id", null: false
+    t.string "municipalities", null: false
+    t.string "blocknumber", null: false
+    t.string "buildingname"
+    t.string "telnumber", null: false
+    t.bigint "purchase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["purchase_id"], name: "index_userorders_on_purchase_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -93,14 +112,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_20_201811) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "orders", "items"
+  add_foreign_key "orders", "purchases"
+  add_foreign_key "purchase_orders", "items"
+  add_foreign_key "purchase_orders", "users"
   add_foreign_key "purchases", "items"
-  add_foreign_key "purchases", "orders"
   add_foreign_key "purchases", "users"
+  add_foreign_key "userorders", "purchases"
 end
