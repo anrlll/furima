@@ -17,6 +17,7 @@ class Item < ApplicationRecord
   belongs_to :category, :condition
   belongs_to :costdelivery, :datedelivery
   belongs_to :regiondelivery
+  has_one :purchase
 
   validates :user, presence: true
 

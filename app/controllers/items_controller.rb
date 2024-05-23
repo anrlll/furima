@@ -19,7 +19,6 @@ class ItemsController < ApplicationController
 
   # 商品個別表示
   def show
-    
   end
 
   # 商品保存
@@ -33,7 +32,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    
+    if @item.purchase
+      redirect_to root_path
+    end
   end
 
   def update
