@@ -21,5 +21,4 @@ test:
 production:
   <<: *default
   adapter: postgresql
-  # 環境変数に追加
   url: <%= ENV['DATABASE_URL'] %>
