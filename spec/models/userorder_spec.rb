@@ -3,10 +3,8 @@ require 'rails_helper'
 RSpec.describe Userorder, type: :model do
   before do
     @user = FactoryBot.create(:user)
-    @item = FactoryBot.create(:item, user_id:@user.id)
-    @purchase = FactoryBot.create(:purchase, item_id:@item.id,user_id:@user.id)
-    @order = FactoryBot.create(:order,purchase_id: @purchase.id)
-    @userorder = FactoryBot.build(:userorder, purchase_id: @purchase.id, user_id: @user.id, item_id: @item.id)
+    @item = FactoryBot.create(:item,user_id: @user.id)
+    @userorder = FactoryBot.build(:userorder, user_id: @user.id, item_id: @item.id)
   end
 
   describe '商品購入' do
@@ -84,6 +82,16 @@ RSpec.describe Userorder, type: :model do
         @userorder.token = ''
         @userorder.valid?
         expect(@userorder.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'userが紐付いていなければ購入できない' do
+        @userorder.user_id = ''
+        @userorder.valid?
+        expect(@userorder.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていなければ購入できない' do
+        @userorder.item_id = ''
+        @userorder.valid?
+        expect(@userorder.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
