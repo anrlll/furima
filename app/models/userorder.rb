@@ -1,6 +1,6 @@
 class Userorder < ApplicationRecord
   include ActiveModel::Model
-  extend ActiveHash::Associations::ActiveRecordExtensions
+  # extend ActiveHash::Associations::ActiveRecordExtensions
   attr_accessor :postcode, :regiondelivery_id, :municipalities, :blocknumber, :buildingname, :telnumber, :purchase_id, :token, :user_id, :item_id
 
   with_options presence: true do
@@ -11,9 +11,10 @@ class Userorder < ApplicationRecord
     validates :token
     validates :item_id
     validates :user_id
+    validates :purchase_id
   end
 
-  validates :regiondelivery_id, numericality: { other_than: 1 }
+  validates :regiondelivery_id, numericality: { other_than: 1, message: "can't be blank" }
   belongs_to :regiondelivery
 
   def save

@@ -2,13 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Userorder, type: :model do
   before do
-    @user = FactoryBot.build(:user)
-    @item = FactoryBot.build(:item, user_id:@user.id)
-    @purchase = FactoryBot.build(:purchase, item_id: @item.id,user_id: @user.id)
-    @order = FactoryBot.build(:order,purchase_id: @purchase.id)
-    # 暗号化されてnilになっている
-    @userorder = FactoryBot.build(:userorder, purchase_id: @order.purchase_id)
-    binding.pry
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item, user_id:@user.id)
+    @purchase = FactoryBot.create(:purchase, item_id:@item.id,user_id:@user.id)
+    @order = FactoryBot.create(:order,purchase_id: @purchase.id)
+    @userorder = FactoryBot.build(:userorder, purchase_id: @purchase.id, user_id: @user.id, item_id: @item.id)
   end
 
   describe '商品購入' do
@@ -40,7 +38,7 @@ RSpec.describe Userorder, type: :model do
       it '都道府県が初期値では購入できない' do
         @userorder.regiondelivery_id = 1
         @userorder.valid?
-        expect(@userorder.errors.full_messages).to include("Regiondelivery must be other than 1")
+        expect(@userorder.errors.full_messages).to include("Regiondelivery can't be blank")
       end
       it '市区町村が空では購入できない' do
         @userorder.municipalities = ''
